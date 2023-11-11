@@ -7,6 +7,8 @@ public:
     my_string(const char*);                 /* constructor overload */
     my_string(const my_string&);            /* copy constructor */
     my_string& operator=(my_string const&); /* copy assignment operator overload */
+    my_string& operator=(const char*);      /* assignment operator overload */
+    char& operator[](const int);            /* index operator overload */
     ~my_string();                           /* destructor */
 
     /* Methods */

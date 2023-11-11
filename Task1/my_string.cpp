@@ -39,21 +39,51 @@ my_string& my_string::operator=(my_string const& rhs) {
 /* Then copy the contents of 'rhs' into data including length */
 /* Returns a dereferenced pointer to the current object to allow for method chaining. ie. s = t = u; */
 my_string& my_string::operator=(const char* rhs) {
-    if (data != nullptr) 
+    if (data) {
         delete[] data;
+    } 
 
-    length = std::strlen(rhs);
-    data = new char[length + 1];
-    std::strcpy(data, rhs);
+    if (rhs) {
+        length = std::strlen(rhs);
+        data = new char[length + 1];
+        std::strcpy(data, rhs);
+    }
 
     return *this;
 }
+
+/* Index operator overload - returns the character at the specified index 'i'. */
+char& my_string::operator[](const int i) {
+    if (!is_valid_index(i))
+        throw std::out_of_range("Index is out of range.");
+    
+    return data[i];
+}
+
+/* Tried to implement strcmp replica but it didn't work */
+// int my_string::my_strcmp(const char* str1, const my_string& str2) {
+//     int i = 0;
+//     while (str1[i] != '\0' && str2.get_char(i) != '\0') {
+//         if (str1[i] != str2.get_char(i)) {
+//             return (str1[i] < str2.get_char(i)) ? -1 : 1;
+//         }
+//         i++;
+//     }
+
+//     if (str1[i] == '\0' && str2.get_char(i) == '\0') {
+//         return 0;
+//     } else if (str1[i] == '\0') {
+//         return -1;
+//     } else {
+//         return 1;
+//     }
+// }
 
 /* Returns the character at the specified index 'i'. */
 /* Throws an exception if the index is out of range with a message */
 char my_string::get_char(const int i) const {
     if (!is_valid_index(i))
-        throw std::out_of_range("Index is out of range."); 
+        throw std::out_of_range("Index is out of range.");
     
     return data[i];
 }
@@ -62,7 +92,7 @@ char my_string::get_char(const int i) const {
 /* Throws an exception if the index is out of range with a message */
 void my_string::set_char(const int i, const char& c) {
     if (!is_valid_index(i))
-        throw std::out_of_range("Index is out of range."); 
+        throw std::out_of_range("Index is out of range.");
     
     data[i] = c;
 }

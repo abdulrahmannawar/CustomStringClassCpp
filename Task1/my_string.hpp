@@ -9,13 +9,19 @@ public:
     my_string(const char*);                 /* constructor overload */
     my_string(const my_string&);            /* copy constructor */
     my_string& operator=(my_string const&); /* copy assignment operator overload */
-    my_string& operator=(const char*);      /* copy assignment operator overload */
+    my_string& operator=(const char*);      /* assignment operator overload */
+    char& operator[](const int);            /* index operator overload */
     ~my_string() = default;                 /* destructor */
 
     /* Methods */
     char get_char(const int) const;          /* get character at index */
     void set_char(const int, const char& c); /* set character at index */
     void print() const;                      /* print string */
+
+    /* Tried to implement strcmp replica overloads but didnt work */
+    // static int my_strcmp(const char*, const my_string&);
+    // static int my_strcmp(const my_string&, const my_string&);
+    // static int my_strcmp(const my_string&, const char*);
 
 private:
     int length; /* length of string */

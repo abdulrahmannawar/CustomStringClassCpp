@@ -43,12 +43,21 @@ my_string& my_string::operator=(my_string const& rhs) {
 my_string& my_string::operator=(const char* rhs) {
     if (data != nullptr) 
         delete[] data;
-
-    length = std::strlen(rhs);
-    data = new char[length + 1];
-    std::strcpy(data, rhs);
+    
+    if (rhs) {
+        length = std::strlen(rhs);
+        data = new char[length + 1];
+        std::strcpy(data, rhs);
+    }
 
     return *this;
+}
+
+char& my_string::operator[](const int i) {
+    if (!is_valid_index(i))
+        throw std::out_of_range("Index is out of range.");
+    
+    return data[i];
 }
 
 /* Destructor - calls helper method cleanup() */

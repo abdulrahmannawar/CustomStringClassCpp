@@ -36,6 +36,31 @@ my_string& my_string::operator=(my_string const& rhs) {
     return *this;
 }
 
+/* Copy assignment operator overload - update the current string with the contents of char* 'rhs' through copying. */
+/* if data is not null, deallocate memory of data */
+/* Then copy the contents of 'rhs' into data including length */
+/* Returns a dereferenced pointer to the current object to allow for method chaining. ie. s = t = u; */
+my_string& my_string::operator=(const char* rhs) {
+    if (data != nullptr) 
+        delete[] data;
+
+    if (rhs) {
+        length = std::strlen(rhs);
+        data = new char[length + 1];
+        std::strcpy(data, rhs);
+    }
+
+    return *this;
+}
+
+/* Index operator overload - returns the character at the specified index 'i'. */
+char& my_string::operator[](const int i) {
+    if (!is_valid_index(i))
+        throw std::out_of_range("Index is out of range.");
+    
+    return data[i];
+}
+
 my_string::~my_string() {
     cleanup();
 }
