@@ -34,7 +34,7 @@ public:
     T& operator*() const { return *ptr; }
 
     /* Equality operator overload - allows you to compare two objects of type ReferenceCounter */
-    T& operator==(const ReferenceCounter& rhs) const { return ptr == rhs.ptr; }
+    // T& operator==(const ReferenceCounter& rhs) const { return ptr == rhs.ptr; }
 
     /* Arrow operator overload - allows you to access the members of the object pointed to by the pointer */
     T* operator->() const { return ptr; }
